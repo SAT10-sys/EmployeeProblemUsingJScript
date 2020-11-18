@@ -18,7 +18,7 @@ while(employeeHours<MAXIMUM_WORKING_HOURS_PER_MONTH && totalWorkingDays<WORKING_
     totalWorkingDays++;
 }
 let employeeWage=employeeHours*WAGE_PER_HOUR;
-console.log("Total Working Hours: "+employeeHours+"\nTotal Monthly Wages: "+employeeWage);
+console.log("Total Working Days: "+totalWorkingDays+"\nTotal Working Hours: "+employeeHours+"\nTotal Wage: "+employeeWage);
 function GetEmployeeHours(employeeCheck)
 {
 switch(employeeCheck)
