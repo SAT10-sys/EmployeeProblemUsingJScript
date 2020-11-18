@@ -4,13 +4,18 @@ const PART_TIME_HOURS=4;
 const FULL_TIME_HOURS=8;
 const WAGE_PER_HOUR=20;
 const WORKING_DAYS_PER_MONTH=20;
-
+const MAXIMUM_WORKING_HOURS_PER_MONTH=100;
 
 let employeeHours=0;
-for(i=0;i<WORKING_DAYS_PER_MONTH;++i)
+let totalWorkingDays=0;
+while(employeeHours<MAXIMUM_WORKING_HOURS_PER_MONTH && totalWorkingDays<WORKING_DAYS_PER_MONTH)
 {
     let employeeCheck=Math.floor(Math.random()*10)%3;
-    employeeHours=employeeHours+GetEmployeeHours(employeeCheck);
+    let dailyWorkingHours=employeeHours+GetEmployeeHours(employeeCheck);
+    if((dailyWorkingHours+employeeHours)>MAXIMUM_WORKING_HOURS_PER_MONTH)
+    break;
+    employeeHours=employeeHours+dailyWorkingHours;
+    totalWorkingDays++;
 }
 let employeeWage=employeeHours*WAGE_PER_HOUR;
 console.log("Total Working Hours: "+employeeHours+"\nTotal Monthly Wages: "+employeeWage);
