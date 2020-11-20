@@ -1,36 +1,32 @@
-const IS_PRESENT_FULL_TIME=2;
-const IS_PRESENT_PART_TIME=1;
-const PART_TIME_HOURS=4;
-const FULL_TIME_HOURS=8;
-const WAGE_PER_HOUR=20;
-const WORKING_DAYS_PER_MONTH=20;
-const MAXIMUM_WORKING_HOURS_PER_MONTH=100;
+const IS_PART_TIME = 1;
+const IS_FULL_TIME = 2;
+const PART_TIME_HOURS = 4;
+const FULL_TIME_HOURS = 8;
+function getWorkingHrs(empCheck)
+{
+    switch (empCheck) {
+        case IS_PART_TIME:
+            return PART_TIME_HOURS;
+        case IS_FULL_TIME:
+            return FULL_TIME_HOURS;
+        default:
+            return 0;
+    }
+}
+const MAX_HOURS_IN_MONTHS = 160;
+const MAX_NUMBER_OF_DAYS = 20;
+const WAGE_PER_HOUR = 20;
+let totalEmpHours = 0;
+let totalWorkingDays = 0;
+let dailyWages = [];
 
-let employeeHours=0;
-let totalWorkingDays=0;
-while(employeeHours<MAXIMUM_WORKING_HOURS_PER_MONTH && totalWorkingDays<WORKING_DAYS_PER_MONTH)
+while (totalEmpHours < MAX_HOURS_IN_MONTHS && totalWorkingDays < MAX_NUMBER_OF_DAYS) 
 {
-    let employeeCheck=Math.floor(Math.random()*10)%3;
-    let dailyWorkingHours=employeeHours+GetEmployeeHours(employeeCheck);
-    if((dailyWorkingHours+employeeHours)>MAXIMUM_WORKING_HOURS_PER_MONTH)
-    break;
-    employeeHours=employeeHours+dailyWorkingHours;
     totalWorkingDays++;
+    let empCheck = Math.floor(Math.random() * 10) % 3;
+    let dailyEmpHours = getWorkingHrs(empCheck);
+    totalEmpHours += dailyEmpHours;
+    dailyWages.push(dailyEmpHours * WAGE_PER_HOUR);
 }
-let employeeWage=employeeHours*WAGE_PER_HOUR;
-console.log("Total Working Days: "+totalWorkingDays+"\nTotal Working Hours: "+employeeHours+"\nTotal Wage: "+employeeWage);
-function GetEmployeeHours(employeeCheck)
-{
-switch(employeeCheck)
-{
-    case IS_PRESENT_FULL_TIME:
-        return FULL_TIME_HOURS;
-        break;
-    case IS_PRESENT_PART_TIME:
-        return PART_TIME_HOURS;
-        break;
-    default:
-        return 0;
-        break;
-}
-}
+let totalEmpWage = WAGE_PER_HOUR * totalEmpHours;
+console.log("Total working days  : " + totalWorkingDays + "\nTotal working hours : " + totalEmpHours + " \nTotal employee wage : " + totalEmpWage);
